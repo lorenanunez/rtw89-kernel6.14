@@ -66,13 +66,13 @@ static int rtw89_ops_start(struct ieee80211_hw *hw)
 	return ret;
 }
 
-static void rtw89_ops_stop(struct ieee80211_hw *hw)
+static void rtw89_ops_stop(struct ieee80211_hw *hw, bool going_down)
 {
-	struct rtw89_dev *rtwdev = hw->priv;
+    struct rtw89_dev *rtwdev = hw->priv;
 
-	mutex_lock(&rtwdev->mutex);
-	rtw89_core_stop(rtwdev);
-	mutex_unlock(&rtwdev->mutex);
+    mutex_lock(&rtwdev->mutex);
+    rtw89_core_stop(rtwdev);
+    mutex_unlock(&rtwdev->mutex);
 }
 
 static int rtw89_ops_config(struct ieee80211_hw *hw, u32 changed)
@@ -1213,7 +1213,7 @@ const struct ieee80211_ops rtw89_ops = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 11, 0)
 	.set_sar_specs		= rtw89_ops_set_sar_specs,
 #endif
-	.sta_rc_update		= rtw89_ops_sta_rc_update,
+	.link_sta_rc_update		= rtw89_ops_sta_rc_update,
 #if LINUX_VERSION_CODE > KERNEL_VERSION(5, 6, 0)
 	.set_tid_config		= rtw89_ops_set_tid_config,
 #endif

@@ -2588,13 +2588,11 @@ EXPORT_SYMBOL(rtw89_core_napi_stop);
 
 void rtw89_core_napi_init(struct rtw89_dev *rtwdev)
 {
-	init_dummy_netdev(&rtwdev->netdev);
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)
-	netif_napi_add(&rtwdev->netdev, &rtwdev->napi,
-		       rtwdev->hci.ops->napi_poll);
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,14,0)
+    memset(&rtwdev->netdev, 0, sizeof(rtwdev->netdev));
+    rtwdev->netdev.features |= NETIF_F_HIGHDMA;
 #else
-	netif_napi_add(&rtwdev->netdev, &rtwdev->napi,
-		       rtwdev->hci.ops->napi_poll, 0);
+    init_dummy_netdev(&rtwdev->netdev);
 #endif
 }
 EXPORT_SYMBOL(rtw89_core_napi_init);

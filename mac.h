@@ -1045,12 +1045,12 @@ rtw89_write32_port(struct rtw89_dev *rtwdev, struct rtw89_vif *rtwvif, u32 base,
 
 static inline void
 rtw89_write32_port_mask(struct rtw89_dev *rtwdev, struct rtw89_vif *rtwvif,
-			u32 base, u32 mask, u32 data)
+            u32 base, u32 mask, u32 data)
 {
-	u32 reg;
+    u32 reg;
 
-	reg = rtw89_mac_reg_by_port(rtwdev, base, rtwvif->port, rtwvif->mac_idx);
-	rtw89_write32_mask(rtwdev, reg, mask, data);
+    reg = rtw89_mac_reg_by_port(rtwdev, base, rtwvif->port, rtwvif->mac_idx);
+    rtw89_write32_mask(rtwdev, reg, mask, data);
 }
 
 static inline void
@@ -1296,17 +1296,17 @@ static inline int rtw89_mac_txpwr_write32(struct rtw89_dev *rtwdev,
 }
 
 static inline int rtw89_mac_txpwr_write32_mask(struct rtw89_dev *rtwdev,
-					       enum rtw89_phy_idx phy_idx,
-					       u32 reg_base, u32 mask, u32 val)
+                           enum rtw89_phy_idx phy_idx,
+                           u32 reg_base, u32 mask, u32 val)
 {
-	const struct rtw89_mac_gen_def *mac = rtwdev->chip->mac_def;
-	u32 cr;
+    const struct rtw89_mac_gen_def *mac = rtwdev->chip->mac_def;
+    u32 cr;
 
-	if (!mac->get_txpwr_cr(rtwdev, phy_idx, reg_base, &cr))
-		return -EINVAL;
+    if (!mac->get_txpwr_cr(rtwdev, phy_idx, reg_base, &cr))
+        return -EINVAL;
 
-	rtw89_write32_mask(rtwdev, cr, mask, val);
-	return 0;
+    rtw89_write32_mask(rtwdev, cr, mask, val);
+    return 0;
 }
 
 static inline void rtw89_mac_ctrl_hci_dma_tx(struct rtw89_dev *rtwdev,

@@ -26,6 +26,8 @@ endif
 EXTRA_CFLAGS += -O2
 EXTRA_CFLAGS += -DCONFIG_RTW89_DEBUGMSG
 EXTRA_CFLAGS += -DCONFIG_RTW89_DEBUGFS
+EXTRA_CFLAGS += -Wno-implicit-function-declaration
+EXTRA_CFLAGS += -Wno-incompatible-pointer-types
 KEY_FILE ?= MOK.der
 
 obj-m += rtw89core.o
